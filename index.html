@@ -1,0 +1,392 @@
+
+
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open Knowledge Library · Multilingual Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: oklch(0.962 0.009 84);
+  --surface: oklch(0.995 0.004 84);
+  --surface-2: oklch(0.94 0.01 82);
+  --ink: oklch(0.27 0.018 52);
+  --ink-soft: oklch(0.5 0.016 52);
+  --ink-faint: oklch(0.62 0.014 52);
+  --line: oklch(0.88 0.011 78);
+  --line-soft: oklch(0.92 0.008 78);
+  --hero-bg: oklch(0.235 0.024 46);
+  --hero-card: oklch(0.29 0.022 46);
+  --hero-stat: oklch(0.335 0.02 46);
+  --hero-ink: oklch(0.95 0.01 80);
+  --hero-ink-soft: oklch(0.76 0.02 66);
+  --hero-line: oklch(0.4 0.02 50);
+  --accent: oklch(0.605 0.185 38);
+  --accent-ink: oklch(0.985 0.01 60);
+  --coral: oklch(0.79 0.115 46);
+  --focus: oklch(0.6 0.14 250);
+  --dot-rgb: 231,204,171;
+  --shadow: 0 1px 2px oklch(0.2 0.02 50 / 0.06), 0 8px 24px oklch(0.2 0.02 50 / 0.07);
+  --shadow-card: 0 2px 4px oklch(0.2 0.02 50 / 0.1), 0 14px 34px oklch(0.2 0.02 50 / 0.16);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-theme="dark"]{
+  --bg: oklch(0.205 0.016 52);
+  --surface: oklch(0.255 0.019 52);
+  --surface-2: oklch(0.3 0.02 52);
+  --ink: oklch(0.94 0.01 80);
+  --ink-soft: oklch(0.76 0.014 74);
+  --ink-faint: oklch(0.62 0.014 66);
+  --line: oklch(0.36 0.017 54);
+  --line-soft: oklch(0.31 0.015 54);
+  --hero-bg: oklch(0.185 0.02 46);
+  --hero-card: oklch(0.25 0.02 46);
+  --hero-stat: oklch(0.3 0.02 46);
+  --hero-line: oklch(0.38 0.02 50);
+  --dot-rgb: 236,214,186;
+  --shadow: 0 1px 2px oklch(0 0 0 / 0.3), 0 10px 28px oklch(0 0 0 / 0.4);
+  --shadow-card: 0 2px 6px oklch(0 0 0 / 0.35), 0 16px 40px oklch(0 0 0 / 0.5);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;transition:background .4s var(--ease),color .4s var(--ease)}
+body[data-locale="jp"]{font-family:"Noto Sans JP","Inter",sans-serif}
+body[data-locale="kr"]{font-family:"Noto Sans KR","Inter",sans-serif}
+body[data-locale="cn"]{font-family:"Noto Sans SC","Inter",sans-serif}
+.serif{font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1360px;margin:0 auto;padding:0 40px}
+header{position:sticky;top:0;z-index:50;background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.head-row{display:flex;align-items:center;gap:24px;padding:16px 0}
+.logo{display:flex;align-items:baseline;gap:12px;white-space:nowrap;flex-shrink:0;cursor:pointer}
+.logo .name{font-family:"Fraunces",serif;font-size:23px;font-weight:600;letter-spacing:-.01em}
+.logo .name b{color:var(--accent);font-weight:700}
+.logo .tag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+.search{flex:1;position:relative;min-width:120px}
+.search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--ink-faint)}
+.search input{width:100%;padding:12px 16px 12px 44px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:14.5px;transition:border-color .2s,box-shadow .2s}
+.search input::placeholder{color:var(--ink-faint)}
+.search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 18%,transparent)}
+.lang-select{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);flex-shrink:0;transition:border-color .2s}
+.lang-select:hover{border-color:var(--ink-faint)}
+.lang-select .flag{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.05em;background:var(--surface-2);padding:2px 5px;border-radius:4px;color:var(--ink-soft)}
+.lang-select .ls-main{font-size:13.5px;font-weight:600;line-height:1.2}
+.lang-select .ls-sub{font-size:11px;color:var(--ink-faint);line-height:1.2}
+.lang-select svg{width:15px;height:15px;color:var(--ink-faint);transition:transform .2s}
+.lang-select.open svg.chev{transform:rotate(180deg)}
+.theme-btn{width:44px;height:44px;flex-shrink:0;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;transition:border-color .2s,transform .2s}
+.theme-btn:hover{border-color:var(--ink-faint);transform:rotate(-15deg)}
+.theme-btn svg{width:18px;height:18px}
+.lang-wrap{position:relative;flex-shrink:0}
+.lang-menu{position:absolute;top:calc(100% + 8px);right:0;width:250px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-card);padding:6px;z-index:60;display:none;opacity:0;transform:translateY(-6px);transition:opacity .18s var(--ease),transform .18s var(--ease)}
+.lang-menu.open{display:block;opacity:1;transform:none}
+.lang-menu button{width:100%;display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;text-align:left;font-size:14px;transition:background .15s}
+.lang-menu button:hover{background:var(--surface-2)}
+.lang-menu button.active{background:color-mix(in oklab,var(--accent) 12%,transparent)}
+.lang-menu .flag{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;background:var(--surface-2);padding:3px 6px;border-radius:5px;color:var(--ink-soft)}
+.lang-menu .lm-country{font-weight:600;line-height:1.2}
+.lang-menu .lm-lang{font-size:12px;color:var(--ink-faint);line-height:1.2}
+.lang-menu button.active .flag{background:var(--accent);color:var(--accent-ink)}
+.hero{background:var(--hero-bg);color:var(--hero-ink);position:relative;overflow:hidden;min-height:560px}
+#dots{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;display:block}
+.hero-inner{position:relative;z-index:2;padding:72px 0 26px;display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:start}
+.hero-copy{position:relative}
+.hero-copy::before{content:"";position:absolute;inset:-30px -40px -24px -40px;z-index:-1;background:radial-gradient(120% 120% at 20% 60%, oklch(0.2 0.02 46 / 0.72), oklch(0.2 0.02 46 / 0.28) 55%, transparent 78%);border-radius:28px;filter:blur(2px)}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--coral);display:inline-flex;align-items:center;gap:9px}
+.eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 0 color-mix(in oklab,var(--coral) 70%,transparent);animation:pulse 2.4s var(--ease) infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in oklab,var(--coral) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.hero h1{font-family:"Fraunces",serif;font-optical-sizing:auto;font-weight:600;font-size:clamp(42px,5.6vw,76px);line-height:1.02;letter-spacing:-.02em;margin:20px 0 24px;text-shadow:0 2px 24px oklch(0.15 0.02 46 / 0.5)}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--coral)}
+body[data-locale="jp"] .hero h1,body[data-locale="kr"] .hero h1,body[data-locale="cn"] .hero h1{font-family:inherit;font-weight:700;line-height:1.25;letter-spacing:0}
+body[data-locale="jp"] .hero h1 em,body[data-locale="kr"] .hero h1 em,body[data-locale="cn"] .hero h1 em{font-style:normal}
+.hero-lead{font-size:17.5px;line-height:1.62;color:var(--hero-ink);max-width:38ch;text-shadow:0 1px 12px oklch(0.15 0.02 46 / 0.5)}
+.hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;align-items:center}
+.btn{padding:15px 30px;border-radius:12px;font-size:15px;font-weight:600;transition:transform .18s var(--ease),background .2s,filter .2s;display:inline-flex;align-items:center;gap:9px}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn-ghost{background:var(--hero-card);color:var(--hero-ink)}
+.btn-ghost:hover{background:var(--hero-stat)}
+.hero-trust{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--hero-ink-soft);margin-top:22px}
+.hero-trust .dots-people{display:flex}
+.hero-trust .pf{width:26px;height:26px;border-radius:50%;border:2px solid var(--hero-bg);margin-left:-8px;display:grid;place-items:center;font-size:10px;font-weight:700;color:var(--accent-ink)}
+.hero-trust .pf:first-child{margin-left:0}
+.source-line{position:relative;z-index:2;padding:22px 0 0;margin-top:32px;border-top:1px solid var(--hero-line);font-size:13px;color:var(--hero-ink-soft)}
+.source-line a{color:var(--coral);text-decoration:underline;text-underline-offset:3px}
+.hero-card{background:color-mix(in oklab,var(--hero-card) 90%,transparent);backdrop-filter:blur(8px);border-radius:20px;padding:32px;position:relative;z-index:2}
+.hero-card .eyebrow{color:var(--hero-ink-soft);font-size:11px}
+.hero-card h2{font-family:"Fraunces",serif;font-size:26px;font-weight:600;margin:14px 0 12px;line-height:1.18}
+body[data-locale="jp"] .hero-card h2,body[data-locale="kr"] .hero-card h2,body[data-locale="cn"] .hero-card h2{font-family:inherit;font-weight:700}
+.hero-card p{font-size:14.5px;color:var(--hero-ink-soft);line-height:1.6}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+.stat{background:var(--hero-stat);border-radius:13px;padding:18px 16px}
+.stat .num{font-family:"Fraunces",serif;font-size:30px;font-weight:600;line-height:1}
+.stat .lbl{font-size:11.5px;color:var(--hero-ink-soft);margin-top:8px;line-height:1.3}
+.langbar{background:var(--surface);border-bottom:1px solid var(--line-soft);position:sticky;top:73px;z-index:40}
+.langbar-inner{display:flex;align-items:center;gap:14px;padding:14px 0;overflow-x:auto;scrollbar-width:none}
+.langbar-inner::-webkit-scrollbar{display:none}
+.langbar .label{font-size:13.5px;color:var(--ink-soft);flex-shrink:0}
+.lang-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:13.5px;font-weight:500;white-space:nowrap;flex-shrink:0;transition:all .18s var(--ease)}
+.lang-chip .flag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:600;color:var(--ink-faint)}
+.lang-chip:hover{border-color:var(--ink-faint)}
+.lang-chip.active{border-color:var(--accent);color:var(--accent);font-weight:600}
+.lang-chip.active .flag{color:var(--accent)}
+main{padding:44px 0 0}
+.main-grid{display:grid;grid-template-columns:220px 1fr;gap:48px;align-items:start}
+.sidebar{position:sticky;top:150px}
+.filter-group{margin-bottom:28px}
+.filter-group h3{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px}
+.pill{padding:7px 15px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:13px;font-weight:500;transition:all .16s var(--ease)}
+.pill:hover{border-color:var(--ink-faint)}
+.pill.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.clear-btn{font-size:14px;font-weight:600;color:var(--accent);margin-bottom:28px;display:inline-block}
+.clear-btn:hover{text-decoration:underline;text-underline-offset:3px}
+.authority{font-size:12.5px;line-height:1.6;color:var(--ink-soft)}
+.authority b{color:var(--ink)}
+.cat-scroll{position:relative;margin-bottom:30px}
+.cat-tabs{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:12px;border-bottom:1px solid var(--line-soft)}
+.cat-tabs::-webkit-scrollbar{height:5px}
+.cat-tabs::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.cat-tab{padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:13.5px;font-weight:500;white-space:nowrap;flex-shrink:0;transition:all .16s var(--ease)}
+.cat-tab:hover{border-color:var(--ink-faint)}
+.cat-tab.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.shelf-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:26px}
+.shelf-head h2{font-family:"Fraunces",serif;font-size:38px;font-weight:600;letter-spacing:-.015em;line-height:1.05}
+body[data-locale="jp"] .shelf-head h2,body[data-locale="kr"] .shelf-head h2,body[data-locale="cn"] .shelf-head h2{font-family:inherit;font-weight:700}
+.shelf-head p{font-size:15px;color:var(--ink-soft);max-width:56ch;margin-top:8px}
+.count{font-size:14px;color:var(--ink-faint);white-space:nowrap;flex-shrink:0}
+.count b{font-family:"IBM Plex Mono",monospace;color:var(--ink);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 26px}
+.card{display:flex;flex-direction:column;animation:fade .5s var(--ease) both}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.cover{position:relative;aspect-ratio:3/3.9;border-radius:5px 12px 12px 5px;padding:22px 22px 20px;display:flex;flex-direction:column;color:oklch(0.97 0.015 80);box-shadow:var(--shadow-card);overflow:hidden;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.cover::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:oklch(0 0 0 / 0.22)}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(150deg,oklch(1 0 0 / 0.1),transparent 55%);pointer-events:none}
+.card:hover .cover{transform:translateY(-6px);box-shadow:0 8px 14px oklch(0.2 0.02 50 / 0.18), 0 26px 50px oklch(0.2 0.02 50 / 0.26)}
+[data-theme="dark"] .card:hover .cover{box-shadow:0 0 0 1px oklch(1 0 0 / 0.08), 0 8px 30px oklch(0 0 0 / 0.5), 0 0 40px oklch(0.7 0.12 60 / 0.14)}
+.cover .cat{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.05em;opacity:.82;position:relative;z-index:1}
+.cover .title{font-family:"Fraunces",serif;font-size:19px;font-weight:600;line-height:1.16;margin-top:12px;position:relative;z-index:1}
+body[data-locale="jp"] .cover .title,body[data-locale="kr"] .cover .title,body[data-locale="cn"] .cover .title{font-family:inherit;font-weight:700}
+.cover .foot{margin-top:auto;position:relative;z-index:1}
+.cover .rule{height:1px;background:oklch(1 0 0 / 0.28);margin-bottom:12px}
+.cover .author{font-family:"IBM Plex Mono",monospace;font-size:11.5px;opacity:.9}
+.cover .badge{position:absolute;top:14px;right:14px;z-index:2;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.06em;padding:3px 7px;border-radius:999px;background:oklch(1 0 0 / 0.16);backdrop-filter:blur(4px)}
+.card-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px}
+.card-meta .lvl{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-faint);letter-spacing:.02em}
+.details-link{display:inline-flex;align-items:center;gap:12px;font-size:13.5px;font-weight:600;cursor:pointer;transition:gap .2s var(--ease)}
+.details-link .en{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);font-weight:500;display:inline-flex;align-items:center;gap:3px}
+.details-link:hover{color:var(--accent)}
+.details-link:hover .en{gap:5px}
+.details-link svg{width:12px;height:12px}
+.empty{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--ink-faint)}
+.empty .serif{font-size:24px;color:var(--ink-soft);display:block;margin-bottom:8px}
+.mission{margin-top:78px;background:linear-gradient(180deg, color-mix(in oklab,var(--accent) 6%,var(--bg)), var(--bg));border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.mission-inner{padding:70px 0;text-align:center;max-width:900px;margin:0 auto}
+.mission .m-label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:inline-flex;align-items:center;gap:9px}
+.mission .m-label svg{width:15px;height:15px}
+.mission blockquote{font-family:"Fraunces",serif;font-optical-sizing:auto;font-weight:500;font-size:clamp(26px,3.6vw,42px);line-height:1.22;letter-spacing:-.015em;color:var(--ink)}
+body[data-locale="jp"] .mission blockquote,body[data-locale="kr"] .mission blockquote,body[data-locale="cn"] .mission blockquote{font-family:inherit;font-weight:700;line-height:1.4}
+.mission blockquote em{font-style:italic;color:var(--accent)}
+body[data-locale="jp"] .mission blockquote em,body[data-locale="kr"] .mission blockquote em,body[data-locale="cn"] .mission blockquote em{font-style:normal}
+footer{background:var(--hero-bg);color:var(--hero-ink);padding:64px 0 40px}
+.foot-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px}
+footer h2{font-family:"Fraunces",serif;font-size:30px;font-weight:600;margin-bottom:16px}
+body[data-locale="jp"] footer h2,body[data-locale="kr"] footer h2,body[data-locale="cn"] footer h2{font-family:inherit;font-weight:700}
+footer p{font-size:15px;color:var(--hero-ink-soft);line-height:1.65;max-width:54ch}
+footer p + p{margin-top:14px}
+footer a.inline{color:var(--coral);text-decoration:underline;text-underline-offset:3px}
+.owner{margin-top:30px;padding-top:26px;border-top:1px solid var(--hero-line);display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.owner-label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--hero-ink-soft)}
+.owner-link{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:var(--hero-card);font-size:14.5px;font-weight:600;transition:background .2s,transform .18s var(--ease)}
+.owner-link:hover{background:var(--hero-stat);transform:translateY(-1px)}
+.owner-link .spot{width:19px;height:19px;color:oklch(0.72 0.17 150);flex-shrink:0}
+.owner-link .arr{width:13px;height:13px;color:var(--hero-ink-soft)}
+.foot-base{margin-top:48px;padding-top:22px;border-top:1px solid var(--hero-line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--hero-ink-soft)}
+.foot-base .brain{display:inline-flex;align-items:center;gap:6px}
+.foot-base .brain svg{width:13px;height:13px;color:var(--accent)}
+.modal-back{position:fixed;inset:0;background:oklch(0.15 0.02 50 / 0.55);backdrop-filter:blur(4px);z-index:100;display:none;align-items:center;justify-content:center;padding:24px;opacity:0;transition:opacity .25s var(--ease)}
+.modal-back.open{display:flex;opacity:1}
+.modal{background:var(--surface);border-radius:20px;max-width:560px;width:100%;overflow:hidden;box-shadow:var(--shadow-card);transform:translateY(16px) scale(.98);transition:transform .3s var(--ease)}
+.modal-back.open .modal{transform:none}
+.modal-cover{height:150px;padding:26px 28px;display:flex;flex-direction:column;justify-content:space-between;color:oklch(0.97 0.015 80);position:relative}
+.modal-cover .cat{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;opacity:.85}
+.modal-cover .m-title{font-family:"Fraunces",serif;font-size:26px;font-weight:600;line-height:1.12}
+body[data-locale="jp"] .modal-cover .m-title,body[data-locale="kr"] .modal-cover .m-title,body[data-locale="cn"] .modal-cover .m-title{font-family:inherit;font-weight:700}
+.modal-close{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;background:oklch(0 0 0 / 0.25);display:grid;place-items:center;transition:background .2s}
+.modal-close:hover{background:oklch(0 0 0 / 0.42)}
+.modal-close svg{width:16px;height:16px;color:oklch(0.97 0 0)}
+.modal-body{padding:26px 28px 28px}
+.modal-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.chip-static{font-family:"IBM Plex Mono",monospace;font-size:11.5px;padding:5px 11px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.modal-body .m-author{font-size:15px;color:var(--ink-soft);margin-bottom:6px}
+.modal-body .m-author b{color:var(--ink);font-weight:600}
+.modal-body .m-desc{font-size:14.5px;color:var(--ink-soft);line-height:1.6;margin:14px 0 22px}
+.modal-actions{display:flex;gap:12px;flex-wrap:wrap}
+.modal-actions .btn-primary{padding:13px 24px;border-radius:11px}
+.modal-actions .btn-line{padding:13px 24px;border-radius:11px;border:1px solid var(--line);background:var(--surface);font-size:15px;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:8px;transition:border-color .2s}
+.modal-actions .btn-line:hover{border-color:var(--ink-faint)}
+.modal-actions svg{width:15px;height:15px}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}.hero-inner{grid-template-columns:1fr;gap:40px}.hero-card{max-width:560px}}
+@media(max-width:820px){.wrap{padding:0 22px}.main-grid{grid-template-columns:1fr;gap:32px}.sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:20px 32px}.authority{grid-column:1/-1}.head-row{flex-wrap:wrap}.search{order:3;flex-basis:100%}.langbar{top:auto;position:static}.grid{grid-template-columns:repeat(2,1fr)}.foot-grid{grid-template-columns:1fr;gap:36px}.shelf-head{flex-direction:column;align-items:flex-start;gap:10px}.mission-inner{padding:54px 0}}
+@media(max-width:480px){.grid{grid-template-columns:1fr 1fr;gap:20px 16px}.hero h1{font-size:38px}.stats{grid-template-columns:1fr}.logo .tag{display:none}}
+</style>
+</head>
+<body data-locale="gb">
+<header>
+  <div class="wrap head-row">
+    <div class="logo" id="logo">
+      <span class="name">Open <b>Knowledge</b> Library</span>
+      <span class="tag" data-i18n="tagline">Multilingual Archive</span>
+    </div>
+    <div class="search">
+      <i data-lucide="search"></i>
+      <input type="text" id="search" data-i18n-ph="searchPh" placeholder="Search by title, author or topic…" aria-label="Search">
+    </div>
+    <div class="lang-wrap">
+      <button class="lang-select" id="langToggle" aria-haspopup="true" aria-expanded="false">
+        <span class="flag" id="hFlag">GB</span>
+        <span><span class="ls-main" id="hMain">United Kingdom · English</span><br><span class="ls-sub" data-i18n="changeHere">Change language here</span></span>
+        <i data-lucide="chevron-down" class="chev"></i>
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu"></div>
+    </div>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode"><i data-lucide="moon"></i></button>
+  </div>
+</header>
+<section class="hero">
+  <canvas id="dots"></canvas>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="pulse"></span><span data-i18n="eyebrow">Open knowledge, organized by language</span></p>
+        <h1 class="serif" id="heroTitle"></h1>
+        <p class="hero-lead" data-i18n="lead"></p>
+        <div class="hero-cta">
+          <a href="#shelf" class="btn btn-primary" data-i18n="explore">Explore collection</a>
+          <button class="btn btn-ghost" id="changeLang" data-i18n="changeLang">Change language</button>
+        </div>
+        <div class="hero-trust">
+          <span class="dots-people">
+            <span class="pf" style="background:#2f5b8f">文</span>
+            <span class="pf" style="background:#a8431d">א</span>
+            <span class="pf" style="background:#296948">あ</span>
+            <span class="pf" style="background:#6c4a80">한</span>
+          </span>
+          <span data-i18n="trust"></span>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <p class="eyebrow" data-i18n="howEyebrow">How this works</p>
+        <h2 class="serif" data-i18n="howTitle">Localized shelf, original authority.</h2>
+        <p data-i18n="howBody"></p>
+        <div class="stats">
+          <div class="stat"><div class="num" id="statResources">17</div><div class="lbl" data-i18n="statResources">resources</div></div>
+          <div class="stat"><div class="num">8</div><div class="lbl" data-i18n="statShelves">language shelves</div></div>
+          <div class="stat"><div class="num">100%</div><div class="lbl" data-i18n="statFree">free and open</div></div>
+        </div>
+      </aside>
+    </div>
+    <p class="source-line"><span data-i18n="primarySource">Primary source</span>: <a href="https://github.com/EbookFoundation/free-programming-books" target="_blank" rel="noopener">EbookFoundation/free-programming-books</a></p>
+  </div>
+</section>
+<nav class="langbar"><div class="wrap langbar-inner" id="langbar"><span class="label" data-i18n="languageLabel">Language:</span></div></nav>
+<main id="shelf">
+  <div class="wrap main-grid">
+    <aside class="sidebar">
+      <div class="filter-group"><h3 data-i18n="level">Level</h3><div class="pill-row" id="levelFilters"><button class="pill" data-level="Beginner" data-i18n="beginner">Beginner</button><button class="pill" data-level="Intermediate" data-i18n="intermediate">Intermediate</button><button class="pill" data-level="Advanced" data-i18n="advanced">Advanced</button></div></div>
+      <div class="filter-group"><h3 data-i18n="format">Format</h3><div class="pill-row" id="formatFilters"><button class="pill" data-format="Book" data-i18n="book">Book</button><button class="pill" data-format="Course" data-i18n="course">Course</button><button class="pill" data-format="Docs" data-i18n="docs">Docs</button></div></div>
+      <a class="clear-btn" id="clearBtn" data-i18n="clear">Clear filters</a>
+      <div class="filter-group"><h3 data-i18n="authority">Authority</h3><p class="authority" data-i18n="authorityBody"></p></div>
+    </aside>
+    <section>
+      <div class="cat-scroll"><div class="cat-tabs" id="catTabs"></div></div>
+      <div class="shelf-head"><div><h2 class="serif"><span id="shelfName">United Kingdom</span> <span data-i18n="shelfWord">shelf</span></h2><p data-i18n="shelfSub"></p></div><div class="count"><b id="countNum">17</b> <span data-i18n="resourcesWord">resources</span></div></div>
+      <div class="grid" id="grid"></div>
+    </section>
+  </div>
+</main>
+<section class="mission"><div class="wrap mission-inner"><p class="m-label"><i data-lucide="heart-handshake"></i><span data-i18n="missionLabel">Why it matters</span></p><blockquote class="serif" id="missionQuote"></blockquote></div></section>
+<footer id="about">
+  <div class="wrap foot-grid">
+    <div>
+      <h2 class="serif">Open Knowledge Library</h2>
+      <p data-i18n="aboutBody"></p>
+      <div class="owner">
+        <span class="owner-label" data-i18n="ownedBy">Owned & curated by</span>
+        <a class="owner-link" href="https://open.spotify.com/intl-pt/artist/16h8q9iOGYIibP6pJWQHg3?si=BgfwKM_lR3ySB7csRBiaTQ" target="_blank" rel="noopener">
+          <svg class="spot" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 1 1-.277-1.213c3.809-.871 7.077-.496 9.712 1.113a.622.622 0 0 1 .207.857zm1.224-2.723a.778.778 0 0 1-1.07.257c-2.688-1.652-6.786-2.131-9.965-1.166a.779.779 0 0 1-.452-1.49c3.632-1.102 8.147-.568 11.23 1.329a.778.778 0 0 1 .257 1.07zm.105-2.835c-3.223-1.914-8.54-2.09-11.618-1.156a.933.933 0 1 1-.542-1.786c3.532-1.072 9.404-.865 13.115 1.338a.933.933 0 0 1-.955 1.604z"/></svg>
+          Thiago Reed
+          <i data-lucide="arrow-up-right" class="arr"></i>
+        </a>
+      </div>
+    </div>
+    <div><p data-i18n="footShelves"></p><p><span data-i18n="contentVia">Content via</span> <a class="inline" href="https://github.com/EbookFoundation/free-programming-books" target="_blank" rel="noopener">free-programming-books</a>.</p></div>
+  </div>
+  <div class="wrap foot-base"><span>Open Knowledge Library · Multilingual Archive</span><span class="brain"><i data-lucide="heart"></i> by ClickUp Brain</span></div>
+</footer>
+<div class="modal-back" id="modalBack">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="modal-cover" id="mCover"><span class="cat" id="mCat"></span><span class="m-title serif" id="mTitle"></span><button class="modal-close" id="modalClose" aria-label="Close"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="modal-meta" id="mMeta"></div>
+      <p class="m-author"><span data-i18n="byWord">by</span> <b id="mAuthor"></b></p>
+      <p class="m-desc" id="mDesc"></p>
+      <div class="modal-actions"><a class="btn-primary btn" id="mLink" target="_blank" rel="noopener"><span data-i18n="openResource">Open resource</span> <i data-lucide="external-link"></i></a><button class="btn-line" id="mClose2" data-i18n="close">Close</button></div>
+    </div>
+  </div>
+</div>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+const languages=[{code:"gb",flag:"GB",country:"United Kingdom",lang:"English",shelf:"United Kingdom"},{code:"br",flag:"BR",country:"Brasil",lang:"Português",shelf:"Brasil"},{code:"es",flag:"ES",country:"España",lang:"Español",shelf:"España"},{code:"de",flag:"DE",country:"Deutschland",lang:"Deutsch",shelf:"Deutschland"},{code:"jp",flag:"JP",country:"日本",lang:"日本語",shelf:"日本"},{code:"kr",flag:"KR",country:"대한민국",lang:"한국어",shelf:"대한민국"},{code:"cn",flag:"CN",country:"中国",lang:"中文",shelf:"中国"},{code:"ca",flag:"CA",country:"Canada",lang:"English",shelf:"Canada"}];
+const i18n={gb:{tagline:"Multilingual Archive",searchPh:"Search by title, author or topic…",changeHere:"Change language here",eyebrow:"Open knowledge, organized by language",heroTitle:'A digital library that feels native in <em>your language.</em>',lead:"Browse a local-language shelf first, while the English original stays close as the source of authority whenever it exists.",trust:"Read by curious minds across 8 language shelves.",explore:"Explore collection",changeLang:"Change language",howEyebrow:"How this works",howTitle:"Localized shelf, original authority.",howBody:"Pick a language and you get that shelf first. When a strong English original exists, it stays linked as the canonical reference instead of getting buried.",statResources:"resources",statShelves:"language shelves",statFree:"free and open",primarySource:"Primary source",languageLabel:"Language:",level:"Level",beginner:"Beginner",intermediate:"Intermediate",advanced:"Advanced",format:"Format",book:"Book",course:"Course",docs:"Docs",clear:"Clear filters",authority:"Authority",authorityBody:"<b>English</b> stays the reference. Localized shelves improve readability; the original English link is kept whenever available.",shelfWord:"shelf",shelfSub:"Books and courses organized by the selected language, always linked back to the original source.",resourcesWord:"resources",missionLabel:"Why it matters",missionQuote:'Learning lands deeper when it speaks the language you <em>think, feel, and dream in.</em>',aboutBody:"A visual multilingual layer on top of open knowledge. We don't replace the original repository. We make it easier to navigate, in the language you actually read.",ownedBy:"Owned & curated by",footShelves:"Language shelves for United Kingdom, Brazil, Spain, Germany, Japan, South Korea, China and Canada. English remains the source of authority.",contentVia:"Content via",byWord:"by",openResource:"Open resource",close:"Close",allCat:"All",originalTag:"EN · original",translatedTag:"Translated"},br:{tagline:"Arquivo Multilíngue",searchPh:"Buscar por título, autor ou tema…",changeHere:"Trocar o idioma aqui",eyebrow:"Conhecimento aberto, organizado por idioma",heroTitle:'Uma biblioteca digital que soa nativa no <em>seu idioma.</em>',lead:"Navegue primeiro pela estante no seu idioma, enquanto o original em inglês fica por perto como fonte de autoridade sempre que existir.",trust:"Lido por mentes curiosas em 8 estantes de idioma.",explore:"Explorar coleção",changeLang:"Trocar idioma",howEyebrow:"Como funciona",howTitle:"Estante local, autoridade original.",howBody:"Escolha um idioma e você recebe aquela estante primeiro. Quando existe um bom original em inglês, ele fica linkado como referência canônica em vez de ficar enterrado.",statResources:"recursos",statShelves:"estantes de idioma",statFree:"livre e aberto",primarySource:"Fonte principal",languageLabel:"Idioma:",level:"Nível",beginner:"Iniciante",intermediate:"Intermediário",advanced:"Avançado",format:"Formato",book:"Livro",course:"Curso",docs:"Docs",clear:"Limpar filtros",authority:"Autoridade",authorityBody:"O <b>inglês</b> continua sendo a referência. As estantes locais melhoram a leitura; o link do original em inglês é mantido sempre que disponível.",shelfWord:"",shelfSub:"Livros e cursos organizados pelo idioma selecionado, sempre com link de volta para a fonte original.",resourcesWord:"recursos",missionLabel:"Por que importa",missionQuote:'O aprendizado toca mais fundo quando fala a língua em que você <em>pensa, sente e sonha.</em>',aboutBody:"Uma camada visual multilíngue sobre o conhecimento aberto. Não substituímos o repositório original. Só deixamos mais fácil navegar, no idioma que você realmente lê.",ownedBy:"Site de e curado por",footShelves:"Estantes de idioma para Reino Unido, Brasil, Espanha, Alemanha, Japão, Coreia do Sul, China e Canadá. O inglês continua sendo a fonte de autoridade.",contentVia:"Conteúdo via",byWord:"por",openResource:"Abrir recurso",close:"Fechar",allCat:"Todos",originalTag:"EN · original",translatedTag:"Traduzido"},es:{tagline:"Archivo Multilingüe",searchPh:"Buscar por título, autor o tema…",changeHere:"Cambiar el idioma aquí",eyebrow:"Conocimiento abierto, organizado por idioma",heroTitle:'Una biblioteca digital que se siente nativa en <em>tu idioma.</em>',lead:"Explora primero la estantería en tu idioma, mientras el original en inglés permanece cerca como fuente de autoridad siempre que exista.",trust:"Leído por mentes curiosas en 8 estanterías de idioma.",explore:"Explorar colección",changeLang:"Cambiar idioma",howEyebrow:"Cómo funciona",howTitle:"Estantería local, autoridad original.",howBody:"Elige un idioma y obtienes esa estantería primero. Cuando existe un buen original en inglés, queda enlazado como referencia canónica en vez de quedar enterrado.",statResources:"recursos",statShelves:"estanterías de idioma",statFree:"libre y abierto",primarySource:"Fuente principal",languageLabel:"Idioma:",level:"Nivel",beginner:"Principiante",intermediate:"Intermedio",advanced:"Avanzado",format:"Formato",book:"Libro",course:"Curso",docs:"Docs",clear:"Limpiar filtros",authority:"Autoridad",authorityBody:"El <b>inglés</b> sigue siendo la referencia. Las estanterías locales mejoran la lectura; el enlace al original en inglés se mantiene siempre que está disponible.",shelfWord:"",shelfSub:"Libros y cursos organizados por el idioma seleccionado, siempre enlazados a la fuente original.",resourcesWord:"recursos",missionLabel:"Por qué importa",missionQuote:'El aprendizaje cala más hondo cuando habla el idioma en que <em>piensas, sientes y sueñas.</em>',aboutBody:"Una capa visual multilingüe sobre el conocimiento abierto. No reemplazamos el repositorio original. Solo facilitamos navegarlo, en el idioma que realmente lees.",ownedBy:"Propiedad y curado por",footShelves:"Estanterías de idioma para Reino Unido, Brasil, España, Alemania, Japón, Corea del Sur, China y Canadá. El inglés sigue siendo la fuente de autoridad.",contentVia:"Contenido vía",byWord:"por",openResource:"Abrir recurso",close:"Cerrar",allCat:"Todos",originalTag:"EN · original",translatedTag:"Traducido"},de:{tagline:"Mehrsprachiges Archiv",searchPh:"Nach Titel, Autor oder Thema suchen…",changeHere:"Sprache hier ändern",eyebrow:"Offenes Wissen, nach Sprache geordnet",heroTitle:'Eine digitale Bibliothek, die sich in <em>deiner Sprache</em> heimisch anfühlt.',lead:"Durchstöbere zuerst das Regal in deiner Sprache, während das englische Original als Autoritätsquelle in der Nähe bleibt, wann immer es existiert.",trust:"Gelesen von neugierigen Köpfen über 8 Sprachregale hinweg.",explore:"Sammlung erkunden",changeLang:"Sprache ändern",howEyebrow:"So funktioniert es",howTitle:"Lokales Regal, originale Autorität.",howBody:"Wähle eine Sprache und du bekommst zuerst dieses Regal. Wenn ein starkes englisches Original existiert, bleibt es als kanonische Referenz verlinkt, statt begraben zu werden.",statResources:"Ressourcen",statShelves:"Sprachregale",statFree:"frei und offen",primarySource:"Hauptquelle",languageLabel:"Sprache:",level:"Niveau",beginner:"Anfänger",intermediate:"Mittel",advanced:"Fortgeschritten",format:"Format",book:"Buch",course:"Kurs",docs:"Docs",clear:"Filter zurücksetzen",authority:"Autorität",authorityBody:"<b>Englisch</b> bleibt die Referenz. Lokale Regale verbessern die Lesbarkeit; der Link zum englischen Original bleibt erhalten, wann immer verfügbar.",shelfWord:"Regal",shelfSub:"Bücher und Kurse nach der gewählten Sprache geordnet, immer mit Link zurück zur Originalquelle.",resourcesWord:"Ressourcen",missionLabel:"Warum es zählt",missionQuote:'Wissen bleibt tiefer, wenn es die Sprache spricht, in der du <em>denkst, fühlst und träumst.</em>',aboutBody:"Eine visuelle mehrsprachige Schicht über offenem Wissen. Wir ersetzen das Original-Repository nicht. Wir machen es einfacher zu navigieren, in der Sprache, die du wirklich liest.",ownedBy:"Betrieben & kuratiert von",footShelves:"Sprachregale für Vereinigtes Königreich, Brasilien, Spanien, Deutschland, Japan, Südkorea, China und Kanada. Englisch bleibt die Autoritätsquelle.",contentVia:"Inhalt über",byWord:"von",openResource:"Ressource öffnen",close:"Schließen",allCat:"Alle",originalTag:"EN · Original",translatedTag:"Übersetzt"},jp:{tagline:"多言語アーカイブ",searchPh:"タイトル・著者・トピックで検索…",changeHere:"ここで言語を変更",eyebrow:"言語で整理されたオープンな知識",heroTitle:'<em>あなたの言語</em>で自然に感じるデジタル図書館。',lead:"まずは母語の棚を見ながら、英語の原典が存在する限り、権威ある出典としてすぐそばに置かれます。",trust:"8つの言語の棚で、好奇心あふれる人々に読まれています。",explore:"コレクションを見る",changeLang:"言語を変更",howEyebrow:"仕組み",howTitle:"ローカルな棚、原典の権威。",howBody:"言語を選ぶと、その棚が最初に表示されます。優れた英語の原典があれば、埋もれずに正典リファレンスとしてリンクされ続けます。",statResources:"リソース",statShelves:"言語の棚",statFree:"無料・オープン",primarySource:"主な出典",languageLabel:"言語：",level:"レベル",beginner:"初級",intermediate:"中級",advanced:"上級",format:"形式",book:"書籍",course:"コース",docs:"ドキュメント",clear:"フィルターをクリア",authority:"権威",authorityBody:"<b>英語</b>が基準であり続けます。ローカルな棚は読みやすさを高めますが、英語原典へのリンクは可能な限り保持されます。",shelfWord:"の棚",shelfSub:"選択した言語で整理された書籍とコース。常に原典へのリンクを保持します。",resourcesWord:"リソース",missionLabel:"なぜ大切か",missionQuote:'学びは、あなたが<em>考え、感じ、夢を見る言語</em>で語りかけるとき、より深く心に届きます。',aboutBody:"オープンな知識の上にある多言語のビジュアル層です。元のリポジトリを置き換えるのではなく、あなたが実際に読む言語でナビゲートしやすくします。",ownedBy:"運営・キュレーション",footShelves:"英国、ブラジル、スペイン、ドイツ、日本、韓国、中国、カナダの言語棚。英語が権威の出典であり続けます。",contentVia:"コンテンツ提供",byWord:"著者",openResource:"リソースを開く",close:"閉じる",allCat:"すべて",originalTag:"EN · 原典",translatedTag:"翻訳"},kr:{tagline:"다국어 아카이브",searchPh:"제목, 저자 또는 주제로 검색…",changeHere:"여기서 언어 변경",eyebrow:"언어별로 정리된 오픈 지식",heroTitle:'<em>당신의 언어</em>로 자연스럽게 느껴지는 디지털 도서관.',lead:"먼저 모국어 서가를 둘러보세요. 영어 원본이 존재하는 한, 권위 있는 출처로 가까이 유지됩니다.",trust:"8개 언어 서가에서 호기심 많은 이들이 읽고 있습니다.",explore:"컬렉션 살펴보기",changeLang:"언어 변경",howEyebrow:"작동 방식",howTitle:"현지 서가, 원본의 권위.",howBody:"언어를 선택하면 해당 서가가 먼저 나타납니다. 훌륭한 영어 원본이 있으면 묻히지 않고 정본 참조로 연결된 채 유지됩니다.",statResources:"자료",statShelves:"언어 서가",statFree:"무료 및 공개",primarySource:"주요 출처",languageLabel:"언어:",level:"수준",beginner:"입문",intermediate:"중급",advanced:"고급",format:"형식",book:"도서",course:"강의",docs:"문서",clear:"필터 지우기",authority:"권위",authorityBody:"<b>영어</b>가 기준으로 유지됩니다. 현지 서가는 가독성을 높이며, 영어 원본 링크는 가능한 한 유지됩니다.",shelfWord:"서가",shelfSub:"선택한 언어로 정리된 도서와 강의로, 항상 원본 출처로 연결됩니다.",resourcesWord:"자료",missionLabel:"왜 중요한가",missionQuote:'배움은 당신이 <em>생각하고, 느끼고, 꿈꾸는 언어</em>로 말할 때 더 깊이 다가옵니다.',aboutBody:"오픈 지식 위에 놓인 다국어 시각 레이어입니다. 원본 저장소를 대체하지 않습니다. 당신이 실제로 읽는 언어로 더 쉽게 탐색하도록 돕습니다.",ownedBy:"운영 및 큐레이션",footShelves:"영국, 브라질, 스페인, 독일, 일본, 대한민국, 중국, 캐나다의 언어 서가. 영어가 권위의 출처로 유지됩니다.",contentVia:"콘텐츠 출처",byWord:"저자",openResource:"자료 열기",close:"닫기",allCat:"전체",originalTag:"EN · 원본",translatedTag:"번역"},cn:{tagline:"多语言档案",searchPh:"按标题、作者或主题搜索…",changeHere:"在此更改语言",eyebrow:"按语言整理的开放知识",heroTitle:'一座在<em>你的语言</em>中如母语般自然的数字图书馆。',lead:"先浏览你所用语言的书架，只要存在优质英文原版，它就会作为权威来源留在近旁。",trust:"来自 8 个语言书架、好奇心满满的读者正在阅读。",explore:"浏览馆藏",changeLang:"更改语言",howEyebrow:"运作方式",howTitle:"本地书架，原版权威。",howBody:"选择一种语言，你会先看到那个书架。当存在优质英文原版时，它会作为规范参考保持链接，而不会被埋没。",statResources:"资源",statShelves:"语言书架",statFree:"免费开放",primarySource:"主要来源",languageLabel:"语言：",level:"级别",beginner:"入门",intermediate:"进阶",advanced:"高级",format:"格式",book:"图书",course:"课程",docs:"文档",clear:"清除筛选",authority:"权威",authorityBody:"<b>英语</b>始终是参考基准。本地书架提升可读性；只要有英文原版链接就会保留。",shelfWord:"书架",shelfSub:"按所选语言整理的图书与课程，始终链接回原始来源。",resourcesWord:"资源",missionLabel:"为何重要",missionQuote:'当知识用你<em>思考、感受、做梦的语言</em>诉说时，它会更深地留在心里。',aboutBody:"这是叠加在开放知识之上的多语言可视层。我们不替代原始仓库，只是让你用真正阅读的语言更容易浏览。",ownedBy:"运营与策展",footShelves:"覆盖英国、巴西、西班牙、德国、日本、韩国、中国和加拿大的语言书架。英语始终是权威来源。",contentVia:"内容来自",byWord:"作者",openResource:"打开资源",close:"关闭",allCat:"全部",originalTag:"EN · 原版",translatedTag:"已翻译"},ca:{tagline:"Multilingual Archive",searchPh:"Search by title, author or topic…",changeHere:"Change language here",eyebrow:"Open knowledge, organized by language",heroTitle:'A digital library that feels native in <em>your language.</em>',lead:"Browse a local-language shelf first, while the English original stays close as the source of authority whenever it exists.",trust:"Read by curious minds across 8 language shelves.",explore:"Explore collection",changeLang:"Change language",howEyebrow:"How this works",howTitle:"Localized shelf, original authority.",howBody:"Pick a language and you get that shelf first. When a strong English original exists, it stays linked as the canonical reference instead of getting buried.",statResources:"resources",statShelves:"language shelves",statFree:"free and open",primarySource:"Primary source",languageLabel:"Language:",level:"Level",beginner:"Beginner",intermediate:"Intermediate",advanced:"Advanced",format:"Format",book:"Book",course:"Course",docs:"Docs",clear:"Clear filters",authority:"Authority",authorityBody:"<b>English</b> stays the reference. Localized shelves improve readability; the original English link is kept whenever available.",shelfWord:"shelf",shelfSub:"Books and courses organized by the selected language, always linked back to the original source.",resourcesWord:"resources",missionLabel:"Why it matters",missionQuote:'Learning lands deeper when it speaks the language you <em>think, feel, and dream in.</em>',aboutBody:"A visual multilingual layer on top of open knowledge. We don't replace the original repository. We make it easier to navigate, in the language you actually read.",ownedBy:"Owned & curated by",footShelves:"Language shelves for United Kingdom, Brazil, Spain, Germany, Japan, South Korea, China and Canada. English remains the source of authority.",contentVia:"Content via",byWord:"by",openResource:"Open resource",close:"Close",allCat:"All",originalTag:"EN · original",translatedTag:"Translated"}};
+const categoryDefs=[{id:"Python",label:{}},{id:"JavaScript",label:{}},{id:"Web & Front-end",label:{de:"Web & Frontend"}},{id:"Rust",label:{}},{id:"Go",label:{}},{id:"Java",label:{}},{id:"C / C++",label:{}},{id:"AI & Machine Learning",label:{br:"IA & Machine Learning",es:"IA & Machine Learning",de:"KI & Machine Learning",jp:"AI・機械学習",kr:"AI & 머신러닝",cn:"人工智能与机器学习"}},{id:"Security",label:{br:"Segurança",es:"Seguridad",de:"Sicherheit",jp:"セキュリティ",kr:"보안",cn:"安全"}},{id:"DevOps & Systems",label:{br:"DevOps & Sistemas",es:"DevOps & Sistemas",de:"DevOps & Systeme",jp:"DevOps・システム",kr:"DevOps & 시스템",cn:"DevOps 与系统"}},{id:"Computer Science",label:{br:"Ciência da Computação",es:"Ciencias de la Computación",de:"Informatik",jp:"コンピュータサイエンス",kr:"컴퓨터 과학",cn:"计算机科学"}}];
+const pool=[{id:"automate",cat:"Python",lvl:"Beginner",fmt:"Book",a:"Al Sweigart",c:"#2f5b8f",url:"https://automatetheboringstuff.com/",t:"Automate the Boring Stuff with Python",d:"A hands-on introduction to programming for total beginners, focused on practical automation with Python.",tl:{br:"Automatize Tarefas Maçantes com Python",es:"Automatiza las Tareas Aburridas con Python",jp:"退屈なことはPythonにやらせよう",cn:"用 Python 自动化无聊的工作"},dl:{br:"Uma introdução prática à programação para iniciantes totais, focada em automação com Python."},langs:["gb","br","es","de","jp","kr","cn","ca"]},{id:"thinkpython",cat:"Python",lvl:"Beginner",fmt:"Book",a:"Allen B. Downey",c:"#33608f",url:"https://greenteapress.com/wp/think-python-2e/",t:"Think Python",d:"An introduction to Python that emphasizes computer science concepts and clear thinking.",tl:{br:"Pense em Python",es:"Piensa en Python",cn:"像计算机科学家一样思考 Python"},langs:["gb","br","es","de","cn","ca"]},{id:"eloquentjs",cat:"JavaScript",lvl:"Intermediate",fmt:"Book",a:"Marijn Haverbeke",c:"#8a5a12",url:"https://eloquentjavascript.net/",t:"Eloquent JavaScript",d:"A modern, in-depth guide to JavaScript, the programming language of the web.",tl:{br:"JavaScript Eloquente",es:"JavaScript Elocuente",de:"Eloquentes JavaScript",jp:"Eloquent JavaScript 第3版"},langs:["gb","br","es","de","jp","cn","ca"]},{id:"modernjs",cat:"JavaScript",lvl:"Beginner",fmt:"Docs",a:"Ilya Kantor",c:"#946113",url:"https://javascript.info/",t:"The Modern JavaScript Tutorial",d:"From the basics to advanced topics with simple, detailed explanations of modern JavaScript.",tl:{br:"O Tutorial JavaScript Moderno",es:"El Tutorial de JavaScript Moderno",de:"Das moderne JavaScript-Tutorial",jp:"最新JavaScriptチュートリアル",kr:"모던 JavaScript 튜토리얼",cn:"现代 JavaScript 教程"},langs:["gb","br","es","de","jp","kr","cn","ca"]},{id:"mdn",cat:"Web & Front-end",lvl:"Beginner",fmt:"Docs",a:"Mozilla",c:"#1d6a5f",url:"https://developer.mozilla.org/docs/Learn",t:"MDN Learn Web Development",d:"The canonical reference for building for the open web, maintained by Mozilla and the community.",tl:{br:"MDN Aprender Desenvolvimento Web",es:"MDN Aprender Desarrollo Web",de:"MDN Webentwicklung lernen",jp:"MDN Web開発を学ぶ",kr:"MDN 웹 개발 학습",cn:"MDN 学习 Web 开发"},langs:["gb","br","es","de","jp","kr","cn","ca"]},{id:"fullstack",cat:"Web & Front-end",lvl:"Intermediate",fmt:"Course",a:"University of Helsinki",c:"#1c655c",url:"https://fullstackopen.com/en/",t:"Full Stack Open",d:"A deep dive into modern web development with React, Redux, Node.js, GraphQL and TypeScript.",tl:{es:"Full Stack Open (Español)",cn:"Full Stack Open 中文"},langs:["gb","es","de","cn","ca"]},{id:"rustbook",cat:"Rust",lvl:"Intermediate",fmt:"Book",a:"Steve Klabnik & Carol Nichols",c:"#a8431d",url:"https://doc.rust-lang.org/book/",t:"The Rust Programming Language",d:"The official book on Rust, covering ownership, the type system, and building reliable software.",tl:{br:"A Linguagem de Programação Rust",es:"El Lenguaje de Programación Rust",de:"Die Programmiersprache Rust",jp:"The Rust Programming Language 日本語版",kr:"러스트 프로그래밍 언어",cn:"Rust 程序设计语言"},langs:["gb","br","es","de","jp","kr","cn","ca"]},{id:"go101",cat:"Go",lvl:"Intermediate",fmt:"Docs",a:"Tapir Liu",c:"#1a6f82",url:"https://go101.org/",t:"Go 101",d:"A focused reference on Go syntax and semantics, from types and control flow to concurrency.",tl:{cn:"Go 101（中文）"},langs:["gb","de","cn","ca"]},{id:"gowebexamples",cat:"Go",lvl:"Beginner",fmt:"Docs",a:"Simon Frey",c:"#1c7891",url:"https://gowebexamples.com/",t:"Go Web Examples",d:"Practical, self-contained examples for building web applications in Go.",langs:["gb","es","ca"]},{id:"javanotes",cat:"Java",lvl:"Beginner",fmt:"Book",a:"David J. Eck",c:"#a23c33",url:"https://math.hws.edu/javanotes/",t:"Introduction to Programming Using Java",d:"A free introductory textbook on programming and computer science using the Java language.",tl:{de:"Einführung in die Programmierung mit Java"},langs:["gb","de","ca"]},{id:"opendata",cat:"C / C++",lvl:"Advanced",fmt:"Book",a:"Pat Morin",c:"#6a5896",url:"https://opendatastructures.org/",t:"Open Data Structures",d:"An open-content textbook covering the design and analysis of data structures with implementations.",tl:{es:"Estructuras de Datos Abiertas",de:"Open Data Structures (Deutsch)"},langs:["gb","es","de","ca"]},{id:"d2l",cat:"AI & Machine Learning",lvl:"Intermediate",fmt:"Book",a:"Zhang, Lipton, Li & Smola",c:"#1d5638",url:"https://d2l.ai/",t:"Dive into Deep Learning",d:"An interactive deep learning book with code, math, and discussions, used at universities worldwide.",tl:{cn:"动手学深度学习",jp:"D2L ディープラーニング入門",kr:"딥러닝 배우기"},langs:["gb","jp","kr","cn","ca"]},{id:"fastai",cat:"AI & Machine Learning",lvl:"Intermediate",fmt:"Course",a:"Jeremy Howard",c:"#296948",url:"https://course.fast.ai/",t:"Practical Deep Learning for Coders",d:"A free course teaching deep learning top-down, building real models from the first lesson.",langs:["gb","es","de","ca"]},{id:"owasp",cat:"Security",lvl:"Intermediate",fmt:"Docs",a:"OWASP",c:"#463a2f",url:"https://owasp.org/www-project-web-security-testing-guide/",t:"OWASP Web Security Testing Guide",d:"The premier cybersecurity testing resource for web application developers and security professionals.",langs:["gb","br","es","de","jp","kr","cn","ca"]},{id:"missingsem",cat:"DevOps & Systems",lvl:"Beginner",fmt:"Course",a:"MIT",c:"#3f6b2b",url:"https://missing.csail.mit.edu/",t:"The Missing Semester of Your CS Education",d:"The tools of the trade: the shell, editors, version control, debugging, everything school skips.",tl:{es:"El Semestre que Falta de tu Educación en CS",cn:"计算机教育中缺失的一课"},langs:["gb","es","cn","ca"]},{id:"progit",cat:"DevOps & Systems",lvl:"Intermediate",fmt:"Book",a:"Scott Chacon & Ben Straub",c:"#3a6231",url:"https://git-scm.com/book/en/v2",t:"Pro Git",d:"The complete, official guide to Git, from basics to internals and advanced workflows.",tl:{br:"Pro Git (Português)",es:"Pro Git (Español)",de:"Pro Git (Deutsch)",jp:"Pro Git 日本語版",kr:"Pro Git 한국어판",cn:"Pro Git 中文版"},langs:["gb","br","es","de","jp","kr","cn","ca"]},{id:"sicp",cat:"Computer Science",lvl:"Advanced",fmt:"Book",a:"Abelson & Sussman",c:"#6c4a80",url:"https://mitpress.mit.edu/9780262510875/",t:"Structure and Interpretation of Computer Programs",d:"The legendary MIT text on the principles of computation, abstraction, and program design.",tl:{cn:"计算机程序的构造和解释"},langs:["gb","cn","ca"]},{id:"ostep",cat:"Computer Science",lvl:"Advanced",fmt:"Book",a:"Arpaci-Dusseau",c:"#674879",url:"https://pages.cs.wisc.edu/~remzi/OSTEP/",t:"Operating Systems: Three Easy Pieces",d:"A free operating systems book organized around virtualization, concurrency and persistence.",langs:["gb","ca"]},{id:"algonotes",cat:"Computer Science",lvl:"Intermediate",fmt:"Book",a:"Various (open notes)",c:"#5a4a7a",url:"https://github.com/EbookFoundation/free-programming-books",t:"Algorithms and Data Structures Notes",d:"Community-curated open notes on algorithms and data structures for interview and study prep.",langs:["gb","br","ca"]},{id:"tsdeep",cat:"JavaScript",lvl:"Advanced",fmt:"Docs",a:"Basarat Ali Syed",c:"#7a5a12",url:"https://basarat.gitbook.io/typescript/",t:"TypeScript Deep Dive",d:"A deep, practical guide to TypeScript for developers who already know JavaScript.",tl:{cn:"深入理解 TypeScript",br:"TypeScript Aprofundado"},langs:["gb","br","cn","ca"]},{id:"pythonpt",cat:"Python",lvl:"Beginner",fmt:"Book",a:"Aprenda Python",c:"#2d5286",url:"https://github.com/EbookFoundation/free-programming-books",t:"Curso Intensivo de Python",d:"Uma introdução acessível e prática à programação com Python, do zero a projetos reais.",tl:{br:"Curso Intensivo de Python"},langs:["br"]},{id:"algores",cat:"Computer Science",lvl:"Intermediate",fmt:"Course",a:"Hello Algo",c:"#4a4a82",url:"https://www.hello-algo.com/",t:"Hello Algo",d:"Animated, beginner-friendly data structures and algorithms with runnable code.",tl:{cn:"Hello 算法",jp:"Hello アルゴリズム",kr:"Hello 알고리즘"},langs:["cn","jp","kr","gb"]}];
+let LOCALE="gb";
+const state={cat:"All",levels:new Set(),formats:new Set(),search:""};
+function t(key){return (i18n[LOCALE]&&i18n[LOCALE][key])!=null?i18n[LOCALE][key]:i18n.gb[key];}
+function shelfBooks(){return pool.filter(b=>b.langs.includes(LOCALE)).map(b=>{const tr=b.tl&&b.tl[LOCALE];return {...b,displayTitle:tr||b.t,isTranslated:!!tr};});}
+function catLabel(def){return (def.label&&def.label[LOCALE])||def.id;}
+function catLabelById(id){if(id==="All")return t("allCat");const d=categoryDefs.find(c=>c.id===id);return d?catLabel(d):id;}
+function applyLocale(){const L=languages.find(l=>l.code===LOCALE);document.body.dataset.locale=LOCALE;document.documentElement.lang=({gb:"en",ca:"en",br:"pt",es:"es",de:"de",jp:"ja",kr:"ko",cn:"zh"})[LOCALE]||"en";document.querySelectorAll("[data-i18n]").forEach(el=>{const v=t(el.getAttribute("data-i18n"));if(v!=null){if(/<[a-z]/i.test(v))el.innerHTML=v;else el.textContent=v;}});document.querySelectorAll("[data-i18n-ph]").forEach(el=>{el.placeholder=t(el.getAttribute("data-i18n-ph"));});document.getElementById("heroTitle").innerHTML=t("heroTitle");document.getElementById("missionQuote").innerHTML=t("missionQuote");document.getElementById("hFlag").textContent=L.flag;document.getElementById("hMain").textContent=L.country+" · "+L.lang;document.getElementById("shelfName").textContent=L.shelf;document.getElementById("statResources").textContent=shelfBooks().length;buildCatTabs();buildLangbar();buildLangMenu();render();if(window.lucide)lucide.createIcons();}
+function buildLangbar(){const bar=document.getElementById("langbar");bar.innerHTML=`<span class="label">${t("languageLabel")}</span>`;languages.forEach(l=>{const b=document.createElement("button");b.className="lang-chip"+(l.code===LOCALE?" active":"");b.innerHTML=`<span class="flag">${l.flag}</span> ${l.country}`;b.onclick=()=>{LOCALE=l.code;state.cat="All";applyLocale();};bar.appendChild(b);});}
+function buildLangMenu(){const menu=document.getElementById("langMenu");menu.innerHTML="";languages.forEach(l=>{const b=document.createElement("button");b.className=(l.code===LOCALE?"active":"");b.setAttribute("role","menuitem");b.innerHTML=`<span class="flag">${l.flag}</span><span><span class="lm-country">${l.country}</span><br><span class="lm-lang">${l.lang}</span></span>`;b.onclick=()=>{LOCALE=l.code;state.cat="All";closeMenu();applyLocale();};menu.appendChild(b);});}
+const langToggle=document.getElementById("langToggle"),langMenu=document.getElementById("langMenu");
+function openMenu(){langMenu.classList.add("open");langToggle.classList.add("open");langToggle.setAttribute("aria-expanded","true");}
+function closeMenu(){langMenu.classList.remove("open");langToggle.classList.remove("open");langToggle.setAttribute("aria-expanded","false");}
+langToggle.onclick=e=>{e.stopPropagation();langMenu.classList.contains("open")?closeMenu():openMenu();};
+document.addEventListener("click",e=>{if(!e.target.closest(".lang-wrap"))closeMenu();});
+function buildCatTabs(){const tabs=document.getElementById("catTabs");tabs.innerHTML="";const ids=["All",...categoryDefs.map(c=>c.id)];const present=new Set(shelfBooks().map(b=>b.cat));ids.filter(id=>id==="All"||present.has(id)).forEach(id=>{const b=document.createElement("button");b.className="cat-tab"+(id===state.cat?" active":"");b.textContent=catLabelById(id);b.onclick=()=>{state.cat=id;document.querySelectorAll('.cat-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');render();};tabs.appendChild(b);});}
+document.querySelectorAll('#levelFilters .pill').forEach(p=>{p.onclick=()=>{const v=p.dataset.level;p.classList.toggle('active');state.levels.has(v)?state.levels.delete(v):state.levels.add(v);render();};});
+document.querySelectorAll('#formatFilters .pill').forEach(p=>{p.onclick=()=>{const v=p.dataset.format;p.classList.toggle('active');state.formats.has(v)?state.formats.delete(v):state.formats.add(v);render();};});
+document.getElementById("clearBtn").onclick=()=>{state.levels.clear();state.formats.clear();state.cat="All";state.search="";document.getElementById("search").value="";document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));buildCatTabs();render();};
+document.getElementById("search").addEventListener("input",e=>{state.search=e.target.value.toLowerCase().trim();render();});
+document.getElementById("changeLang").onclick=()=>document.querySelector('.langbar').scrollIntoView({behavior:'smooth',block:'center'});
+document.getElementById("logo").onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+const grid=document.getElementById("grid");
+function render(){const list=shelfBooks().filter(b=>{if(state.cat!=="All"&&b.cat!==state.cat)return false;if(state.levels.size&&!state.levels.has(b.lvl))return false;if(state.formats.size&&!state.formats.has(b.fmt))return false;if(state.search){const hay=(b.displayTitle+" "+b.t+" "+b.a+" "+b.cat).toLowerCase();if(!hay.includes(state.search))return false;}return true;});document.getElementById("countNum").textContent=list.length;grid.innerHTML="";if(!list.length){grid.innerHTML=`<div class="empty"><span class="serif">—</span>${t("clear")}</div>`;return;}const isEng=(LOCALE==="gb"||LOCALE==="ca");list.forEach((b,i)=>{const card=document.createElement("article");card.className="card";card.style.animationDelay=(i*0.03)+"s";const badge=(!isEng&&b.isTranslated)?`<span class="badge">${t("translatedTag")}</span>`:"";card.innerHTML=`<div class="cover" style="background:${b.c}">${badge}<span class="cat">${catLabelById(b.cat)}</span><span class="title">${b.displayTitle}</span><div class="foot"><div class="rule"></div><span class="author">${b.a}</span></div></div><div class="card-meta"><span class="lvl">${t(b.lvl.toLowerCase())} · ${t(b.fmt.toLowerCase())}</span><a class="details-link">${t("openResource")} <span class="en">EN <i data-lucide="arrow-up-right"></i></span></a></div>`;card.querySelector(".cover").onclick=()=>openModal(b);card.querySelector(".details-link").onclick=()=>openModal(b);grid.appendChild(card);});if(window.lucide)lucide.createIcons();}
+const modalBack=document.getElementById("modalBack");
+function openModal(b){document.getElementById("mCover").style.background=b.c;document.getElementById("mCat").textContent=catLabelById(b.cat);document.getElementById("mTitle").textContent=b.displayTitle;document.getElementById("mAuthor").textContent=b.a;document.getElementById("mDesc").textContent=(b.dl&&b.dl[LOCALE])||b.d;document.getElementById("mLink").href=b.url;const origTag=b.isTranslated?t("translatedTag"):t("originalTag");document.getElementById("mMeta").innerHTML=`<span class="chip-static">${t(b.lvl.toLowerCase())}</span><span class="chip-static">${t(b.fmt.toLowerCase())}</span><span class="chip-static">${origTag}</span>`;modalBack.classList.add("open");document.body.style.overflow="hidden";if(window.lucide)lucide.createIcons();}
+function closeModal(){modalBack.classList.remove("open");document.body.style.overflow="";}
+document.getElementById("modalClose").onclick=closeModal;document.getElementById("mClose2").onclick=closeModal;
+modalBack.onclick=e=>{if(e.target===modalBack)closeModal();};
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();closeMenu();}});
+const themeBtn=document.getElementById("themeBtn");
+themeBtn.onclick=()=>{const dark=document.documentElement.getAttribute("data-theme")==="dark";document.documentElement.setAttribute("data-theme",dark?"light":"dark");themeBtn.innerHTML=`<i data-lucide="${dark?"moon":"sun"}"></i>`;if(window.lucide)lucide.createIcons();};
+(function(){const canvas=document.getElementById("dots");if(!canvas)return;const ctx=canvas.getContext("2d");const COLS=48,ROWS=34;let W=0,H=0,dpr=1,count=0,raf=null;function dotColor(a){const rgb=getComputedStyle(document.documentElement).getPropertyValue("--dot-rgb").trim()||"231,204,171";return "rgba("+rgb+","+a.toFixed(3)+")";}function size(){const hero=document.querySelector(".hero");W=hero.clientWidth||window.innerWidth;H=hero.clientHeight||560;dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);canvas.style.width=W+"px";canvas.style.height=H+"px";ctx.setTransform(dpr,0,0,dpr,0,0);}function frame(){ctx.clearRect(0,0,W,H);const horizon=H*0.10;for(let iy=0;iy<ROWS;iy++){const p=iy/(ROWS-1);const pe=Math.pow(p,1.7);const rowY=horizon+(H-horizon)*pe;const scale=0.22+pe*1.3;const spread=0.44+pe*1.05;for(let ix=0;ix<COLS;ix++){const colT=ix/(COLS-1)-0.5;const x=W/2+colT*W*spread;if(x<-30||x>W+30)continue;const wave=Math.sin((ix+count)*0.3)+Math.sin((iy+count)*0.5);const y=rowY-wave*22*scale;if(y<-30||y>H+30)continue;let r=scale*1.8;if(r<0.5)r=0.5;if(r>3.8)r=3.8;const a=0.12+pe*0.6;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=dotColor(a);ctx.fill();}}count+=0.08;raf=requestAnimationFrame(frame);}function start(){cancelAnimationFrame(raf);raf=requestAnimationFrame(frame);}size();start();setTimeout(size,300);window.addEventListener("load",()=>{size();start();});window.addEventListener("resize",()=>{clearTimeout(window._dr);window._dr=setTimeout(size,150);});new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)start();else cancelAnimationFrame(raf);});},{threshold:0}).observe(document.querySelector(".hero"));})();
+applyLocale();
+</script>
+</body>
+</html>
+
+                                    
+
+                        
