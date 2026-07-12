@@ -1,0 +1,71 @@
+===============================================================
+  INSTRUÇÕES DE CONTINUAÇÃO - Open Knowledge Library
+  Salve este arquivo e use como referência em novas sessões.
+===============================================================
+
+--- ACESSO AO GITHUB ---
+Conta: timyyf
+Remote: https://github.com/timyyf/open-knowledge-library.git
+Autenticação: gh CLI já logado (https://github.com/timyyf)
+Branch principal: main
+
+--- COMANDOS PADRÃO (sempre usar) ---
+git status                    → Ver o que mudou
+git add .                     → Adicionar tudo
+git add index.html            → Adicionar só o site
+git commit -m "mensagem"      → Commitar
+git push                      → Enviar ao GitHub
+
+--- ESTRUTURA DO PROJETO ---
+Arquivo principal: index.html (self-contained: CSS + HTML + JS + dados)
+README.md
+.gitignore
+INSTRUÇÕES CONTINUAÇÃO.txt (este arquivo)
+
+--- SOBRE O SITE ---
+Nome: Open Knowledge Library
+URL: https://timyyf.github.io/open-knowledge-library/
+Tipo: Biblioteca digital multilíngue de livros de programação
+Total: 172 livros, 18 categorias, 8 idiomas
+Idiomas: GB, BR, ES, DE, JP, KR, CN, CA
+
+--- CATEGORIAS ---
+Python, JavaScript, Web & Front-end, Rust, Go, Java, C / C++,
+TypeScript, PHP, Ruby, Swift & iOS, Kotlin & Android,
+AI & Machine Learning, Data Science, Databases,
+Security, DevOps & Systems, Computer Science
+
+--- ESTADO ATUAL DO CSS/UX ---
+- Grid: flex-wrap com cards de 190px (desktop), 170px (tablet), 140px (mobile)
+- Scroll horizontal com max-height:860px (3 linhas visíveis)
+- Scrollbar horizontal visível (cor accent, arredondada, 7px)
+- Botões de seta esquerda/direita para navegar
+- Botões somem nas bordas (começo/fim)
+- Título do card: 15px Fraunces serif
+- Barra vertical do site: cor accent, arredondada (8px)
+- Categorias: scroll horizontal com fade indicators
+
+--- FLUXO DE TRABALHO ---
+1. Usuário pede alteração
+2. Eu leio o arquivo, faço a mudança
+3. git add + git commit + git push
+4. Informo o commit hash ao usuário
+
+--- IMPORTANTE ---
+- NÃO usar PowerShell para inserir texto UTF-8 (quebra encoding)
+- Se precisar inserir texto com acentos, usar Node.js ou Edit tool
+- O pool de livros está na linha 356+ do index.html
+- categoryDefs está na linha 355
+- i18n (traduções) está na linha 354
+- statResources é dinâmico (calculado por shelfBooks().length)
+
+--- SESSÕES ANTERIORES (resumo) ---
+- Site criado do zero, commit inicial no GitHub
+- Expansão de 17 para 172 livros com traduções
+- Encoding UTF-8 corrigido via Node.js
+- Layout passou por várias iterações (grid 5col, 6col, carousel, grid column-flow)
+- Estado final: flex-wrap horizontal scroll com 3 linhas e botões de seta
+
+--- PARA CONTINUAR DA PRÓXIMA VEZ ---
+Basta ler este arquivo + index.html e seguir o fluxo de trabalho.
+O opencode já tem acesso ao GitHub via gh CLI logado.
